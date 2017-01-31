@@ -1,6 +1,13 @@
 (function () {
 'use strict';
 
+angular.module('NarrowItDownApp', [])
+    .controller('NarrowItDownController', NarrowItDownController)
+
+
+
+    function NarrowItDownController() {}
+/*
 angular.module('shoppingListModule', [])
     .controller('ToBuyController', ToBuyController)
     .controller('AlreadyBoughtController', AlreadyBoughtController)
@@ -32,5 +39,5 @@ angular.module('shoppingListModule', [])
         service.getItemsToBuy = function () {
             return itemsToBuy;
         }
-    };
+    };*/
 })();
