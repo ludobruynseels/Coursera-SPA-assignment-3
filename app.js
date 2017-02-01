@@ -3,41 +3,31 @@
 
 angular.module('NarrowItDownApp', [])
     .controller('NarrowItDownController', NarrowItDownController)
+    .service('MenuSearchService', MenuSearchService)
 
+    NarrowItDownController.$inject = ['MenuSearchService'];
+    function NarrowItDownController(MenuSearchService) {
+       var NarrowIt = this;
+       var promise =  MenuSearchService.GetAllItems();
 
-
-    function NarrowItDownController() {}
-/*
-angular.module('shoppingListModule', [])
-    .controller('ToBuyController', ToBuyController)
-    .controller('AlreadyBoughtController', AlreadyBoughtController)
-    .service('ShoppingListService', ShoppingListService)
-
-    ToBuyController.$inject = ['ShoppingListService'];
-    function ToBuyController(ShoppingListService) {
-        var ToBuy = this;
-
-        ToBuy.Items = ShoppingListService.getItemsToBuy();
+       promise.then ( function (response) {
+               NarrowIt.Items = response.data.menu_items;
+           }
+       )
     }
+    MenuSearchService.$inject = ['$http'];
+    function MenuSearchService($http) {
+       var service = this;
+ /**/
+       service.GetAllItems = function () {
+           var response = $http(
+               {
+                   method: "GET",
+                   url: " https://davids-restaurant.herokuapp.com/menu_items.json"
+               }
+           )
 
-    AlreadyBoughtController.$inject = ['$scope'];
-    function AlreadyBoughtController(ShoppingListService) {
-        var Bought = this;
+           return response;
+       }
     }
-
-    function ShoppingListService() {
-        var service = this;
-        // List of shopping items
-        var itemsToBuy = [{name: 'Cookies', quantity: 10},
-            {name: 'Donuts', quantity: 15},
-            {name: 'Chips', quantity: 3},
-            {name: 'Bounty', quantity: 8},
-            {name: 'Milk', quantity: 2}
-            ];
-
-
-        service.getItemsToBuy = function () {
-            return itemsToBuy;
-        }
-    };*/
 })();
