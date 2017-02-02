@@ -29,7 +29,7 @@ angular.module('NarrowItDownApp', [])
                    if (!NarrowIt.search)
                        return true;
 
-                   var index = item.description.indexOf(NarrowIt.search);
+                   var index = item.description.toLowerCase().indexOf(NarrowIt.search.toLowerCase());
 
                    if (index === -1) return false;
 
