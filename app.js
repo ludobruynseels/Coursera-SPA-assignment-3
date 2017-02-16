@@ -21,8 +21,6 @@ angular.module('NarrowItDownApp', [])
 
         // handler for click event
        NarrowIt.getMatchedMenuItems = function () {
-           console.log('you clicked!');
-
            NarrowIt.found = NarrowIt.Items.filter(
                function (item) {
                    // if no search string entered, list all menu items.
@@ -36,8 +34,23 @@ angular.module('NarrowItDownApp', [])
                    return true;
                }
            )
+
        }
-    }
+
+       NarrowIt.RemoveFromList = function (index) {
+          console.log("You want to remove item nr " + index);
+           var item = NarrowIt.found.find(
+          /*   */   function(item) {
+                   if (item.id === index)
+                       return true;
+               }
+
+
+
+           );
+           console.log(item.description);
+       }
+}
 
     MenuSearchService.$inject = ['$http'];
     function MenuSearchService($http) {
